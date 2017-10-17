@@ -34,23 +34,19 @@ class Authenticator implements AuthenticatorInterface {
     }
 
     public function authenticate($userName, $password) {
-        $storedUser = $this->dbh->exec('select users.id,
+        $storedUser = $this->dbh->exec('SELECT users.id,
                                         users.username,
                                         users.password 
-                                        from users 
-                                        where users.username = ?', $userName);
+                                        FROM users 
+                                        WHERE users.username = ?', $userName);
 
         if (count($storedUser) != 0) {
-            // var_dump($storedUser);
             $storedUser = $storedUser[0];
 
             if (!empty($storedUser['id']))
                 $this->setUserId($storedUser['id']);
 
-            $isAuthenticated = $this->encryptor->verify($password, $storedUser['password']);
-
-            if ($isAuthenticated)
-                $this->authenticated = true;
+            $this->authenticated = $this->encryptor->verify($password, $storedUser['password']);
         }
 
         return $this->authenticated;

@@ -11,7 +11,7 @@ class Language {
    private $words;
 
     private function __construct() {
-        $this->words = require_once 'components/Language/languages/'.strtolower(defined('LANGUAGE') ? LANGUAGE : LANGUAGE_DEFAULT).'.php';
+        $this->words = require_once COMPONENT_LANGUAGES_FOLDER.'/'.strtolower(defined('LANGUAGE') ? LANGUAGE : LANGUAGE_DEFAULT).'.php';
     }
 
     public static function getInstance() {

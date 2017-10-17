@@ -9,6 +9,7 @@ define('LANGUAGE_DEFAULT', 'es');
 
 define('MODULES_FOLDER', 'modules');
 define('COMPONENT_RESPONDER_TYPES_FOLDER', 'components/Responder/types');
+define('COMPONENT_LANGUAGES_FOLDER', 'components/Language/languages');
 define('AUTOLOADER_FOLDERS', 'components');
 // define('AUTOLOADER_FOLDERS',
 //     array(

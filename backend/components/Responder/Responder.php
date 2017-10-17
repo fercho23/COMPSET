@@ -15,12 +15,12 @@ class Responder implements ResponderInterface {
         $filePath = COMPONENT_RESPONDER_TYPES_FOLDER.'/'.$className.'.php';
 
         if (!file_exists($filePath))
-            ErrorHandler::die('unknown_responder_type');
+            ErrorHandler::respond('unknown_responder_type');
 
         include_once $filePath;
 
         if (!class_exists($className))
-            ErrorHandler::die('unknown_responder_type');
+            ErrorHandler::respond('unknown_responder_type');
 
         $this->responder = new $className();
     }

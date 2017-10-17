@@ -7,7 +7,7 @@
             request.callback = callbackFunction;
             request.callbackError = callbackFunctionError;
             addUserIdenfifierInRequest(request);
-            request.addParameter('action', 'tests');
+            request.addParameter('action', 'Tests');
             request.send();
         }
 

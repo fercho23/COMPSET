@@ -5,10 +5,11 @@
 * https://opensource.org/licenses/MIT
 **/
 
-require_once 'components/ActionLoader/interface/ActionInterface.php';
-
 interface LoaderInterface {
     public function load(ActionInterface $action);
+    public function setRequest($actionRequest);
+    public function getActionRequest();
+    public function getActionClass();
 }
 
 ?>

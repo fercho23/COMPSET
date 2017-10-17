@@ -50,7 +50,8 @@ class DatabaseHandler implements DatabaseHandlerInterface {
             # To generate PDO exceptions.
             $this->handle->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
         } catch (PDOException $exception) {
-            die ( CT_DATABASE_CONNECTION_ERROR . $exception->getMessage() );
+            // die ( CT_DATABASE_CONNECTION_ERROR . $exception->getMessage() );
+            ErrorHandler::respond('database_connection_error', $exception->getMessage());
         }
 
         return $this->handle;
@@ -77,8 +78,12 @@ class DatabaseHandler implements DatabaseHandlerInterface {
         $statement = $this->handle->prepare($query);
         $this->statement = $this->bindParams($statement, $param);
         $this->data = $this->statement->execute();
-        if (strpos(strtolower($query), 'select') !== false) $this->returnsData = true;
-        if (strpos(strtolower($query), 'call') !== false) $this->returnsData = true;
+
+        if (strpos(strtolower($query), 'select') !== false)
+            $this->returnsData = true;
+
+        if (strpos(strtolower($query), 'call') !== false)
+            $this->returnsData = true;
     }
 
     public function exec($sql, $params = null) {
@@ -86,10 +91,9 @@ class DatabaseHandler implements DatabaseHandlerInterface {
         try {
             $this->handle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->handle->beginTransaction();
-            if( is_array($sql)) {
+            if (is_array($sql)) {
                 $queries = $sql;
-                foreach ($queries as  $key => $query) 
-                {
+                foreach ($queries as  $key => $query) {
                     $param = (empty($params)) ? null : $params[$key];
                     $this->execute($query, $param);
                 }
@@ -103,7 +107,8 @@ class DatabaseHandler implements DatabaseHandlerInterface {
             $this->handle->commit();
         } catch(PDOException $exception) {
             $this->handle->rollBack();
-            die( CT_DATABASE_TRANSACTION_ERROR . $exception->getMessage() );
+            // die( CT_DATABASE_TRANSACTION_ERROR . $exception->getMessage() );
+            ErrorHandler::respond('database_transaction_error', $exception->getMessage());
         }
 
         return $this->data;

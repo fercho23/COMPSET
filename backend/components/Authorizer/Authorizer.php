@@ -40,30 +40,33 @@ class Authorizer implements AuthorizerInterface {
     }
 
     // private function setAction(ActionInterface $action) {
-    private function setAction($actionModule, $actionClass) {
-        // $this->action = $action;
-        $this->action = $actionModule.'-'. $actionClass;
+    private function setAction($action) {
+        $this->action = $action;
+    }
+
+    public function getActionRequest() {
+        return $this->action;
     }
 
     private function getActionId() {
-        // $actionName =  get_class( $this->action );
-        return $this->dbh->exec('select actions.id 
-                                        from actions
-                                        where actions.name = ?',
-                                        $this->action)[0]['id'];
+        // $actionName =  get_class($this->action);
+        return $this->dbh->exec('SELECT actions.id 
+                                        FROM actions
+                                        WHERE actions.name = ?',
                                         // $actionName)[0]['id'];
+                                        $this->action)[0]['id'];
     }
 
     private function isAdmin() {
         $userId = $this->authenticator->getUserId();
         $adminRoleId = $this->adminRoleId; 
 
-        $isAdmin = $this->dbh->exec('select roles.* 
-                                        from roles
-                                        left join users_has_roles
-                                        on users_has_roles.roles_id = roles.id
-                                        where users_has_roles.users_id = ?
-                                        and users_has_roles.roles_id = ?',
+        $isAdmin = $this->dbh->exec('SELECT roles.* 
+                                        FROM roles
+                                        LEFT JOIN users_has_roles
+                                        ON users_has_roles.roles_id = roles.id
+                                        WHERE users_has_roles.users_id = ?
+                                        AND users_has_roles.roles_id = ?',
                                         array($userId, $adminRoleId)); 
         return ( $isAdmin != array() );
     }
@@ -72,25 +75,24 @@ class Authorizer implements AuthorizerInterface {
         $userId = $this->authenticator->getUserId();
         $actionId = $this->getActionId(); 
 
-        $isAllowed = $this->dbh->exec('select roles.* 
-                                        from roles
-                                        left join users_has_roles
-                                        on users_has_roles.roles_id = roles.id
+        $isAllowed = $this->dbh->exec('SELECT roles.* 
+                                        FROM roles
+                                        LEFT JOIN users_has_roles
+                                        ON users_has_roles.roles_id = roles.id
 
-                                        inner join roles_has_actions
-                                        on roles_has_actions.roles_id = roles.id
+                                        INNER JOIN roles_has_actions
+                                        ON roles_has_actions.roles_id = roles.id
 
-                                        where users_has_roles.users_id = ?
-                                        and roles_has_actions.actions_id = ?',
+                                        WHERE users_has_roles.users_id = ?
+                                        AND roles_has_actions.actions_id = ?',
                                         array($userId, $actionId) );
 
         return ( $isAllowed != array() );
     }
 
     // public function authorize(ActionInterface $action) {
-    public function authorize($actionModule, $actionClass) {
-        // $this->setAction($action);
-        $this->setAction($actionModule, $actionClass);
+    public function authorize($action) {
+        $this->setAction($action);
         $isAuthorized = ( $this->isAdmin() || $this->isAllowed() );
         if($isAuthorized) $this->authorized = true;
         return $this->authorized;

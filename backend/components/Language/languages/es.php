@@ -6,6 +6,9 @@
 **/
 
 return array (
+    'database_connection_error' => '¡Error en la conexión de la base de datos! Mensaje del sistema:',
+    'database_transaction_error' => '¡Error en la transacción de SQL! Mensaje del sistema:',
+
     'post_required' => 'Información por método POST es Requerida',
     //'post_language_required' => 'Lenguaje "language" es Requerido',
     'post_user_required' => 'Usuario "user" es Requerido',

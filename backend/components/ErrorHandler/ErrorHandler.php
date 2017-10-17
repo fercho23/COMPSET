@@ -7,8 +7,9 @@
 
 class ErrorHandler {
 
-    public static function die($languageKeyName) {
+    public static function respond($languageKeyName, $extraMessage='') {
         $message = Language::getInstance()->$languageKeyName;
+        $message .= $extraMessage;
         $responder = new Responder();
         $responder->respond($message);
         // die($message);
