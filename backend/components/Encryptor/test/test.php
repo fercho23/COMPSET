@@ -1,11 +1,10 @@
 <?php
 /**
-* Copyright (c) Pablo Daniel Spennato <pdspennato@gmail.com> 
-* and 2013 Gabriel Ferreira <gabrielinuz@gmail.com>. All rights reserved. 
-* This file is part of COMPSET.
+* Copyright (c) 2017 Fernando Ariel Mateos <fernandoarielmateos@gmail.com>. All rights reserved.
 * Released under the MIT license
 * https://opensource.org/licenses/MIT
 **/
+
 
 require_once 'components/ComponentFactory/ComponentFactory.php';
 require_once 'components/Encryptor/Encryptor.php';
@@ -31,4 +30,5 @@ $verified = $encryptor->verify($password, $hash);
 $verified = ($verified) ? 'TRUE' : 'FALSE';
 
 echo '<h2>VERIFICATION FOR ' . $password . ': ' . $verified . '</h2>';
+
 ?>

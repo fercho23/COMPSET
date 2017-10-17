@@ -6,14 +6,15 @@
 * https://opensource.org/licenses/MIT
 **/
 
-interface AuthorizerInterface
-{
+interface AuthorizerInterface {
     public function setAuthenticator(AuthenticatorInterface $authenticator);
     public function getAuthenticator();
     public function setDatabaseHandler(DatabaseHandlerInterface $dbh);
     public function getDatabaseHandler();
     public function setAdminRoleId($adminRoleId);
     public function getAdminRoleId();
-    public function authorize(ActionInterface $action);
+    // public function authorize(ActionInterface $action);
+    public function authorize($actionModule, $actionClass);
 }
+
 ?>

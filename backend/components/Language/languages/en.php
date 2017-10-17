@@ -1,0 +1,24 @@
+<?php
+/**
+* Copyright (c) 2017 Fernando Ariel Mateos <fernandoarielmateos@gmail.com>. All rights reserved.
+* Released under the MIT license
+* https://opensource.org/licenses/MIT
+**/
+
+return array (
+    'post_required' => 'POST method data Required',
+    //'post_language_required' => 'Language "language" data Required',
+    'post_user_required' => 'User "user" data Required',
+    'post_password_required' => 'Password "password" data Required',
+    'post_action_required' => 'Action "action" data Required',
+
+    'authentication_error' => 'Authentication Error',
+    'action_incorrect_format' => 'Action Incorrect Format',
+    'unknown_action' => 'Unknown Action',
+
+    'authorization_error' => 'Authorization Error',
+
+    'unknown_responder_type' => 'Reponder Type Error',
+);
+
+?>

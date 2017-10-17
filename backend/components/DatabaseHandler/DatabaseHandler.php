@@ -1,33 +1,27 @@
 <?php
 /**
-* Copyright (c) 2013 Gabriel Ferreira <gabrielinuz@gmail.com>. All rights reserved. 
-* This file is part of COMPSET.
+* Copyright (c) 2017 Fernando Ariel Mateos <fernandoarielmateos@gmail.com>. All rights reserved.
 * Released under the MIT license
 * https://opensource.org/licenses/MIT
 **/
 
 include_once 'components/DatabaseHandler/interface/DatabaseHandlerInterface.php';
-include_once 'components/DatabaseHandler/configuration.php';
 
-class DatabaseHandler implements DatabaseHandlerInterface
-{
-    public function __construct()
-    {
+class DatabaseHandler implements DatabaseHandlerInterface {
+
+    public function __construct() {
         $this->handle = null;
         $this->statement = null;
         $this->returnsData = false;
         $this->data = null;
         if (!defined('CT_DATABASE_CHARSET')) define('CT_DATABASE_CHARSET', 'utf8');
-        
+
         $this->connect();
     }
 
-    public function connect()
-    {
-        try 
-        {
-            switch (CT_DATABASE_ENGINE)
-            {
+    public function connect() {
+        try {
+            switch (CT_DATABASE_ENGINE) {
                 case 'sqlite':
                     $this->handle = new PDO( 'sqlite:' . CT_DATABASE_FILE_PATH);
                 break;
@@ -55,41 +49,31 @@ class DatabaseHandler implements DatabaseHandlerInterface
             }
             # To generate PDO exceptions.
             $this->handle->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-        }
-        catch ( PDOException $exception )
-        {
+        } catch (PDOException $exception) {
             die ( CT_DATABASE_CONNECTION_ERROR . $exception->getMessage() );
         }
 
         return $this->handle;
     }
 
-    public function disconnect()
-    {
+    public function disconnect() {
         $this->handle = null;
     }
 
-    private function bindParams($statement, $params)
-    {
-        if (!empty($params))
-        {
-            if (is_array($params)) 
-            {
-                foreach ($params as $key => $value)
-                {
+    private function bindParams($statement, $params) {
+        if (!empty($params)) {
+            if (is_array($params)) {
+                foreach ($params as $key => $value) {
                     $statement->bindValue($key+1, $value);
                 }
-            }
-            else
-            {
+            } else {
                 $statement->bindValue(1, $params);
             }
         }
         return $statement;
-    } 
+    }
 
-    private function execute($query, $param)
-    {
+    private function execute($query, $param) {
         $statement = $this->handle->prepare($query);
         $this->statement = $this->bindParams($statement, $param);
         $this->data = $this->statement->execute();
@@ -97,40 +81,35 @@ class DatabaseHandler implements DatabaseHandlerInterface
         if (strpos(strtolower($query), 'call') !== false) $this->returnsData = true;
     }
 
-    public function exec($sql, $params = null)
-    {
-        try 
-        {  
+    public function exec($sql, $params = null) {
+        // var_dump($sql, $params);
+        try {
             $this->handle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->handle->beginTransaction();
-            if ( is_array($sql) ) 
-            {
+            if( is_array($sql)) {
                 $queries = $sql;
                 foreach ($queries as  $key => $query) 
                 {
                     $param = (empty($params)) ? null : $params[$key];
                     $this->execute($query, $param);
                 }
-            }
-            else
-            {
+            } else {
                 $this->execute($sql, $params);
             }
 
-            if ($this->returnsData) $this->data = $this->statement->fetchAll();
+            if ($this->returnsData)
+                $this->data = $this->statement->fetchAll();
+
             $this->handle->commit();
-        }
-        catch(PDOException $exception)
-        {
+        } catch(PDOException $exception) {
             $this->handle->rollBack();
             die( CT_DATABASE_TRANSACTION_ERROR . $exception->getMessage() );
         }
 
         return $this->data;
-    }   
+    }
 
-    public function __destruct()
-    {
+    public function __destruct() {
         $this->disconnect();
     }
 }

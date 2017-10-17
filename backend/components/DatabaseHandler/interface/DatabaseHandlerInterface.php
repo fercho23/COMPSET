@@ -1,14 +1,14 @@
 <?php
 /**
-* Copyright (c) 2013 Gabriel Ferreira <gabrielinuz@gmail.com>. All rights reserved. 
-* This file is part of COMPSET.
+* Copyright (c) 2017 Fernando Ariel Mateos <fernandoarielmateos@gmail.com>. All rights reserved.
 * Released under the MIT license
 * https://opensource.org/licenses/MIT
 **/
-interface DatabaseHandlerInterface
-{
+
+interface DatabaseHandlerInterface {
     public function connect();
     public function disconnect();
     public function exec($sql, $params);
 }
+
 ?>

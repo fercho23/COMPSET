@@ -1,0 +1,28 @@
+
+.hidden {
+  display: none;
+}
+
+div.TestManager {
+  margin: 10px;
+}
+
+div.TestManager > div.testsTitle{
+  margin-bottom: 10px;
+}
+
+div.TestManager > div.testGroup {
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+
+div.TestManager > div.testGroup > div.testGroupTitle {
+  margin-right: 10px;
+  display: inline-block;
+  cursor: pointer;
+  cursor: hand;
+}
+
+div.TestManager > div.testGroup > small.testGroupTitleSmall {
+  font-style: italic;
+}

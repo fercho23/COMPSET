@@ -1,69 +1,61 @@
 <?php
 /**
-* Copyright (c) 2013-2016 Gabriel Ferreira <gabrielinuz@gmail.com>. All rights reserved. 
-* This file is part of COMPSET.
+* Copyright (c) 2017 Fernando Ariel Mateos <fernandoarielmateos@gmail.com>. All rights reserved.
 * Released under the MIT license
 * https://opensource.org/licenses/MIT
 **/
 
 require_once 'components/Authorizer/interface/AuthorizerInterface.php';
 
-class Authorizer implements AuthorizerInterface
-{
-    public function __construct()
-    {
+class Authorizer implements AuthorizerInterface {
+
+    public function __construct() {
         $this->adminRoleId = 1;
         $this->authorized = false;
     }
 
-    public function setAuthenticator(AuthenticatorInterface $authenticator)
-    {
+    public function setAuthenticator(AuthenticatorInterface $authenticator) {
         $this->authenticator = $authenticator;
         $this->setDatabaseHandler($this->authenticator->getDatabaseHandler());
     }
 
-    public function getAuthenticator()
-    {
+    public function getAuthenticator() {
         return $this->authenticator;
     }
 
-    public function setDatabaseHandler(DatabaseHandlerInterface $dbh)
-    {
+    public function setDatabaseHandler(DatabaseHandlerInterface $dbh) {
         $this->dbh = $dbh;
     }
 
-    public function getDatabaseHandler()
-    {
+    public function getDatabaseHandler() {
         return $this->dbh;
     }
 
-    public function setAdminRoleId($adminRoleId)
-    {
+    public function setAdminRoleId($adminRoleId) {
         $this->adminRoleId = $adminRoleId;
     }
 
-    public function getAdminRoleId()
-    {
+    public function getAdminRoleId() {
         return $this->adminRoleId;
     }
 
-    private function setAction(ActionInterface $action)
-    {
-        $this->action = $action;
+    // private function setAction(ActionInterface $action) {
+    private function setAction($actionModule, $actionClass) {
+        // $this->action = $action;
+        $this->action = $actionModule.'-'. $actionClass;
     }
 
-    private function getActionId()
-    {
-        $actionName =  get_class( $this->action );
+    private function getActionId() {
+        // $actionName =  get_class( $this->action );
         return $this->dbh->exec('select actions.id 
                                         from actions
                                         where actions.name = ?',
-                                        $actionName)[0]['id'];
+                                        $this->action)[0]['id'];
+                                        // $actionName)[0]['id'];
     }
 
-    private function isAdmin()
-    {
-        $userId = $this->authenticator->getUserId(); 
+    private function isAdmin() {
+        $userId = $this->authenticator->getUserId();
         $adminRoleId = $this->adminRoleId; 
 
         $isAdmin = $this->dbh->exec('select roles.* 
@@ -76,9 +68,8 @@ class Authorizer implements AuthorizerInterface
         return ( $isAdmin != array() );
     }
 
-    private function isAllowed()
-    {
-        $userId = $this->authenticator->getUserId(); 
+    private function isAllowed() {
+        $userId = $this->authenticator->getUserId();
         $actionId = $this->getActionId(); 
 
         $isAllowed = $this->dbh->exec('select roles.* 
@@ -96,9 +87,10 @@ class Authorizer implements AuthorizerInterface
         return ( $isAllowed != array() );
     }
 
-    public function authorize(ActionInterface $action)
-    {
-        $this->setAction($action);
+    // public function authorize(ActionInterface $action) {
+    public function authorize($actionModule, $actionClass) {
+        // $this->setAction($action);
+        $this->setAction($actionModule, $actionClass);
         $isAuthorized = ( $this->isAdmin() || $this->isAllowed() );
         if($isAuthorized) $this->authorized = true;
         return $this->authorized;

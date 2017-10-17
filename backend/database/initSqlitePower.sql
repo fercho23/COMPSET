@@ -1,0 +1,53 @@
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+CREATE TABLE IF NOT EXISTS `users` (
+    `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `username` VARCHAR(50) COLLATE utf8_unicode_ci NOT NULL,
+    `password` VARCHAR(50) COLLATE utf8_unicode_ci NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
+
+CREATE TABLE IF NOT EXISTS `users_has_roles` (
+    `users_id` INT(11) UNSIGNED NOT NULL,
+    `roles_id` INT(11) UNSIGNED NOT NULL,
+    PRIMARY KEY (`users_id`, `roles_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
+
+CREATE TABLE IF NOT EXISTS `users_data` (
+    `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `users_id` INT(11) UNSIGNED NOT NULL,
+    `name` VARCHAR(50) COLLATE utf8_unicode_ci NOT NULL,
+    `surname` VARCHAR(50) COLLATE utf8_unicode_ci NOT NULL,
+    `email` VARCHAR(125) COLLATE utf8_unicode_ci NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
+
+CREATE TABLE IF NOT EXISTS `roles` (
+    `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(50) COLLATE utf8_unicode_ci NOT NULL,
+    `description` VARCHAR(200) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
+
+CREATE TABLE IF NOT EXISTS `roles_has_actions` (
+    `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `roles_id` INT(11) UNSIGNED NOT NULL,
+    `actions_id` INT(11) UNSIGNED NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
+
+CREATE TABLE IF NOT EXISTS `actions` (
+    `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(50) COLLATE utf8_unicode_ci NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
+
+CREATE TABLE IF NOT EXISTS `logs` (
+    `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `user_name` VARCHAR(50) COLLATE utf8_unicode_ci NOT NULL,
+    `action_name` VARCHAR(50) COLLATE utf8_unicode_ci NOT NULL,
+    `datetime` DATETIME NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;

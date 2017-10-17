@@ -5,6 +5,8 @@
 * Released under the MIT license
 * https://opensource.org/licenses/MIT
 **/
+
     require_once 'application/Application.php';
     Application::run();
+
 ?>
