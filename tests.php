@@ -19,8 +19,6 @@
 
 </head>
 <body>
-    <!-- <div id="time"></div> -->
-
     <div id="container"></div>
 
     <script type="text/javascript" src="frontend/assets/js/ConfigJs.js"></script>

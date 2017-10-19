@@ -9,12 +9,15 @@ var ConfigJs =
     // frontendUrl: 'frontend/',
     // frontendAssetsUrl: 'frontend/assets',
     // frontendJsonUrl: 'frontend/assets/json',
-    //frontendJsonLanguageUrl: 'frontend/assets/json/language',
+    // frontendJsonLanguageUrl: 'frontend/assets/json/language',
 
     backendUrl: 'backend/',
     backendMainUrl: 'backend/main.php',
 
     frontendUrl: 'frontend/',
+
+    requestContentType: 'application/json',
+    requestAcceptType: 'application/json',
 
     user: 'admin',
     password: '12345',

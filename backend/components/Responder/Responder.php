@@ -10,8 +10,25 @@ include_once 'components/Responder/interface/ResponderInterface.php';
 class Responder implements ResponderInterface {
     private $responder;
 
-    public function __construct($responseType='Json') {
-        $className = ucwords($responseType).'Responder';
+    public function __construct() {
+        $header = HeaderHandler::getInstance();
+
+        $acceptType = strtolower($header->isset('Accept') ? $header->get('Accept') : CONTENT_TYPE_TO_SEND_DEFAULT);
+
+        switch ($acceptType) {
+            case 'json':
+            case 'application/json':
+                $responseType = 'Json';
+                break;
+
+            case 'xml':
+            case 'application/xml':
+                $responseType = 'Xml';
+                break;
+        }
+
+
+        $className = $responseType.'Responder';
         $filePath = COMPONENT_RESPONDER_TYPES_FOLDER.'/'.$className.'.php';
 
         if (!file_exists($filePath))

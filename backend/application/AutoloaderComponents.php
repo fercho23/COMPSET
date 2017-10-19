@@ -18,7 +18,7 @@ final class AutoloaderComponents
         spl_autoload_extensions('.php');
 
         // Get Folders
-        $folders = AUTOLOADER_FOLDERS;
+        $folders = COMPONENTS_FOLDERS;
 
         // Set Folders
         Autoloader::setFolders($folders);

@@ -8,20 +8,23 @@
 include_once 'traits/ToPreventClonedAndDeserializationTrait.php';
 include_once 'traits/SinglentonGetInstanceTrait.php';
 
-class Language {
+class HeaderHandler {
     use ToPreventClonedAndDeserializationTrait;
     use SinglentonGetInstanceTrait;
 
-   private static $instancia;
-   private $words;
+    private static $instancia;
+    private $headers;
 
     private function __construct() {
-        $this->words = require_once COMPONENT_LANGUAGES_FOLDER.'/'.strtolower(defined('LANGUAGE') ? LANGUAGE : LANGUAGE_DEFAULT).'.php';
+        $this->headers = apache_request_headers();
     }
 
-    public function __get($field) {
-        // return $this->words[$field];
-        return htmlentities($this->words[$field], 0, 'UTF-8');
+    public function get($name) {
+        return $this->headers[$name];
+    }
+
+    public function isset($name) {
+        return isset($this->headers[$name]);
     }
 
 }

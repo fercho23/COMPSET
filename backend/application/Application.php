@@ -15,39 +15,24 @@ final class Application {
     public static function run() {
         AutoloaderComponents::run();
 
-        if (!isset($_POST))
-            ErrorHandler::respond('post_required');
+        $input = InputHandler::getInstance();
 
         // LANGUAGE
-            // $_POST['language'] = 'en';
             $language = LANGUAGE_DEFAULT;
-            if (isset($_POST['language']))
-                $language = strtolower($_POST['language']);
+            if ($input->isset('language'))
+                $language = strtolower($input->get('language'));
             define('LANGUAGE', $language);
         // -- LANGUAGE
 
         // REQUIRED DATA
-            if (!isset($_POST['user']))
-                ErrorHandler::respond('post_user_required');
-
-            if (!isset($_POST['password']))
-                ErrorHandler::respond('post_password_required');
-
-            if (!isset($_POST['action']))
-                ErrorHandler::respond('post_action_required');
+            $input->checkInputRequired();
         // -- REQUIRED DATA
-
-        // SANITIZER
-            $inputSanitizer = new TextInputSanitizer;
-            if (isset($_POST))
-                $_POST = $inputSanitizer->sanitize($_POST);
-        // -- SANITIZER
 
         // AUTHENTICATOR
             $authenticator = new Authenticator();
             $authenticator->setDatabaseHandler(new DatabaseHandler());
             $authenticator->setEncryptor(new Encryptor());
-            $authenticated = $authenticator->authenticate($_POST['user'], $_POST['password']);
+            $authenticated = $authenticator->authenticate($input->get('user'), $input->get('password'));
 
             if (!$authenticated)
                 ErrorHandler::respond('authentication_error');
@@ -55,7 +40,7 @@ final class Application {
 
         // ACTION LOADER
             $actionLoader = new ActionLoader();
-            $actionLoader->setRequest($_POST['action']);
+            $actionLoader->setRequest($input->get('action'));
             $actionObject = $actionLoader->getActionClass();
         // -- ACTION LOADER
 

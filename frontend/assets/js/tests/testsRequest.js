@@ -3,7 +3,6 @@
         function functionRequest() {
             var request = new Request();
             request.url = ConfigJs.backendMainUrl;
-            request.method = 'POST';
             request.callback = callbackFunction;
             request.callbackError = callbackFunctionError;
             addUserIdenfifierInRequest(request);

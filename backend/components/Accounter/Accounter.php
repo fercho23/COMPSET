@@ -34,12 +34,11 @@ class Accounter implements AccounterInterface {
 
         $datetime = date('Y-m-d H:i:s');
         // $datetime = 'Y-m-d H:i:s';
-        var_dump($userName, $actionRequest, $datetime);
+        // var_dump($userName, $actionRequest, $datetime);
         $result = $this->dbh->exec('INSERT INTO logs (user_name, action_name, datetime)
                                     VALUES (?, ?, ?)',
                             array($userName, $actionRequest, $datetime));
-        // var_dump($this->authorizer);
-        var_dump($result);
+        // var_dump($result);
     }
 }
 

@@ -7,15 +7,23 @@
 
 define('LANGUAGE_DEFAULT', 'es');
 
+// define('CONTENT_TYPE_TO_SEND', 'es');
+
 define('MODULES_FOLDER', 'modules');
-define('COMPONENT_RESPONDER_TYPES_FOLDER', 'components/Responder/types');
-define('COMPONENT_LANGUAGES_FOLDER', 'components/Language/languages');
-define('AUTOLOADER_FOLDERS', 'components');
-// define('AUTOLOADER_FOLDERS',
-//     array(
-//         'components'
-//     )
-// );
+define('COMPONENTS_FOLDERS', 'components');
+
+// COMPONENTS
+    // COMPONENT_RESPONDER
+        define('COMPONENT_RESPONDER_TYPES_FOLDER', 'components/Responder/types');
+        define('COMPONENT_RESPONDER_CONTENT_TYPE_TO_SEND_DEFAULT', 'application/json');
+    // -- COMPONENT_RESPONDER
+
+    // COMPONENT_LANGUAGE
+    define('COMPONENT_LANGUAGES_FOLDER', 'components/Language/languages');
+    // -- COMPONENT_LANGUAGE
+
+// -- COMPONENTS
+
 
 // DATABASE
     // MESSAGES
