@@ -16,7 +16,10 @@ var ConfigJs =
 
     frontendUrl: 'frontend/',
 
+    // requestContentType: 'application/x-www-form-urlencoded',
     requestContentType: 'application/json',
+    // requestContentType: 'application/xml',
+
     requestAcceptType: 'application/json',
 
     user: 'admin',

@@ -14,24 +14,42 @@ class InputHandler {
 
     private static $instancia;
     private $inputs;
+    private $contentType;
 
     private function __construct() {
-        $inputSanitizer = new TextInputSanitizer;
-        $allInputs = $inputSanitizer->sanitize(explode('&', file_get_contents('php://input')));
-
-        $this->inputs = array();
-        foreach ($allInputs as $inputData) {
-            $input = explode('=', $inputData);
-            $this->inputs[$input[0]] = $input[1];
-        }
+        $headers = HeaderHandler::getInstance();
+        $this->contentType = strtolower($headers->isset('Content-Type') ? $headers->get('Content-Type') : '');
+        $this->setInputs();
     }
 
     public function get($name) {
-        return $this->inputs[$name];
+        switch ($this->contentType) {
+            case 'xml':
+            case 'application/xml':
+                $data = $this->inputs->$name;
+                break;
+
+            default:
+                $data = $this->inputs[$name];
+                break;
+        }
+        return $data;
+        // return $this->inputs[$name];
     }
 
     public function isset($name) {
-        return isset($this->inputs[$name]);
+        switch ($this->contentType) {
+            case 'xml':
+            case 'application/xml':
+                $data = isset($this->inputs->$name);
+                break;
+
+            default:
+                $data = isset($this->inputs[$name]);
+                break;
+        }
+        return $data;
+        // return isset($this->inputs[$name]);
     }
 
     public function checkInputRequired() {
@@ -41,11 +59,43 @@ class InputHandler {
         $inputsRequired['action'] = 'post_action_required';
 
         foreach ($inputsRequired as $inputName => $languageKeyName) {
-            if (!isset($this->inputs[$inputName]))
+            if (!$this->isset($inputName))
                 ErrorHandler::respond($languageKeyName);
         }
     }
 
+    private function setInputs() {
+        $allInputs = file_get_contents('php://input');
+
+        switch ($this->contentType) {
+            case 'json':
+            case 'application/json':
+                $allInputs = json_decode($allInputs);
+                foreach ($allInputs as $key => $value) {
+                    $this->inputs[$key] = $value;
+                }
+                break;
+
+            case 'xml':
+            case 'application/xml':
+                $this->inputs = new SimpleXMLElement($allInputs);
+                break;
+
+            default:
+                $allInputs = explode('&', $allInputs);
+
+                $inputSanitizer = new TextInputSanitizer;
+                $allInputs = $inputSanitizer->sanitize($allInputs);
+
+                $this->inputs = array();
+                foreach ($allInputs as $inputData) {
+                    $input = explode('=', $inputData);
+                    $this->inputs[$input[0]] = $input[1];
+                }
+                break;
+        }
+
+    }
 
 }
 
