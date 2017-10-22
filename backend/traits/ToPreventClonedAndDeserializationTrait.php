@@ -5,8 +5,8 @@
 * https://opensource.org/licenses/MIT
 **/
 
-include_once 'traits/ToPreventClonedTrait.php';
-include_once 'traits/ToPreventDeserializationTrait.php';
+require_once 'traits/ToPreventClonedTrait.php';
+require_once 'traits/ToPreventDeserializationTrait.php';
 
 trait ToPreventClonedAndDeserializationTrait {
 

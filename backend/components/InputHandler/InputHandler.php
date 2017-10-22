@@ -5,51 +5,33 @@
 * https://opensource.org/licenses/MIT
 **/
 
-include_once 'traits/ToPreventClonedAndDeserializationTrait.php';
-include_once 'traits/SinglentonGetInstanceTrait.php';
+require_once 'components/InputHandler/interface/InputInterface.php';
 
-class InputHandler {
+require_once 'traits/ToPreventClonedAndDeserializationTrait.php';
+require_once 'traits/SinglentonGetInstanceTrait.php';
+
+class InputHandler implements InputInterface {
     use ToPreventClonedAndDeserializationTrait;
     use SinglentonGetInstanceTrait;
 
     private static $instancia;
-    private $inputs;
+    private $inputType;
     private $contentType;
 
     private function __construct() {
         $headers = HeaderHandler::getInstance();
         $this->contentType = strtolower($headers->isset('Content-Type') ? $headers->get('Content-Type') : '');
-        $this->setInputs();
+
+        $inputType = $this->getInputType();
+        $this->setInputType($inputType);
     }
 
     public function get($name) {
-        switch ($this->contentType) {
-            case 'xml':
-            case 'application/xml':
-                $data = $this->inputs->$name;
-                break;
-
-            default:
-                $data = $this->inputs[$name];
-                break;
-        }
-        return $data;
-        // return $this->inputs[$name];
+        return $this->inputType->get($name);
     }
 
     public function isset($name) {
-        switch ($this->contentType) {
-            case 'xml':
-            case 'application/xml':
-                $data = isset($this->inputs->$name);
-                break;
-
-            default:
-                $data = isset($this->inputs[$name]);
-                break;
-        }
-        return $data;
-        // return isset($this->inputs[$name]);
+        return $this->inputType->isset($name);
     }
 
     public function checkInputRequired() {
@@ -64,36 +46,43 @@ class InputHandler {
         }
     }
 
-    private function setInputs() {
-        $allInputs = file_get_contents('php://input');
+    private function getInputType() {
+        $data = file_get_contents('php://input');
 
         switch ($this->contentType) {
             case 'json':
             case 'application/json':
-                $allInputs = json_decode($allInputs);
-                foreach ($allInputs as $key => $value) {
-                    $this->inputs[$key] = $value;
-                }
+                $className = 'Json';
                 break;
 
             case 'xml':
             case 'application/xml':
-                $this->inputs = new SimpleXMLElement($allInputs);
+                $className = 'Xml';
                 break;
 
             default:
-                $allInputs = explode('&', $allInputs);
-
-                $inputSanitizer = new TextInputSanitizer;
-                $allInputs = $inputSanitizer->sanitize($allInputs);
-
-                $this->inputs = array();
-                foreach ($allInputs as $inputData) {
-                    $input = explode('=', $inputData);
-                    $this->inputs[$input[0]] = $input[1];
-                }
+                $className = 'Standard';
                 break;
         }
+
+
+        $className = $className.'Input';
+        $filePath = COMPONENT_INPUT_HANDLER_TYPES_FOLDER.'/'.$className.'.php';
+
+        if (!file_exists($filePath))
+            ErrorHandler::respond('unknown_input_type');
+
+        include_once $filePath;
+
+        if (!class_exists($className))
+            ErrorHandler::respond('unknown_input_type');
+
+        return new $className($data);
+
+    }
+
+    private function setInputType(InputInterface $inputType) {
+        $this->inputType = $inputType;
 
     }
 

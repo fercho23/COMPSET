@@ -5,7 +5,7 @@
 * https://opensource.org/licenses/MIT
 **/
 
-include_once 'components/DatabaseHandler/interface/DatabaseHandlerInterface.php';
+require_once 'components/DatabaseHandler/interface/DatabaseHandlerInterface.php';
 
 class DatabaseHandler implements DatabaseHandlerInterface {
 

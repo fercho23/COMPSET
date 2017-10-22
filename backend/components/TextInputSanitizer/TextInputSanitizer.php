@@ -5,7 +5,7 @@
 * https://opensource.org/licenses/MIT
 **/
 
-include_once 'components/TextInputSanitizer/interface/SanitizerInterface.php';
+require_once 'components/TextInputSanitizer/interface/SanitizerInterface.php';
 
 class TextInputSanitizer implements SanitizerInterface {
 

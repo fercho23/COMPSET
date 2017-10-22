@@ -22,6 +22,10 @@ define('COMPONENTS_FOLDERS', 'components');
     define('COMPONENT_LANGUAGES_FOLDER', 'components/Language/languages');
     // -- COMPONENT_LANGUAGE
 
+    // COMPONENT_INPUT
+        define('COMPONENT_INPUT_HANDLER_TYPES_FOLDER', 'components/InputHandler/types');
+    // -- COMPONENT_INPUT
+
 // -- COMPONENTS
 
 

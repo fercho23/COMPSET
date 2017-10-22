@@ -22,6 +22,7 @@ return array (
     'authorization_error' => 'Error de Autorización',
 
     'unknown_responder_type' => 'Error en el Tipo de Respuesta',
+    'unknown_input_type' => 'Error en el Tipo de Input',
 );
 
 ?>

@@ -5,7 +5,7 @@
 * https://opensource.org/licenses/MIT
 **/
 
-include_once 'components/Encryptor/interface/EncryptorInterface.php';
+require_once 'components/Encryptor/interface/EncryptorInterface.php';
 
 class Encryptor implements EncryptorInterface {
 

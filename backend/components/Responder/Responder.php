@@ -5,7 +5,7 @@
 * https://opensource.org/licenses/MIT
 **/
 
-include_once 'components/Responder/interface/ResponderInterface.php';
+require_once 'components/Responder/interface/ResponderInterface.php';
 
 class Responder implements ResponderInterface {
     private $responder;
@@ -18,17 +18,17 @@ class Responder implements ResponderInterface {
         switch ($acceptType) {
             case 'json':
             case 'application/json':
-                $responseType = 'Json';
+                $className = 'Json';
                 break;
 
             case 'xml':
             case 'application/xml':
-                $responseType = 'Xml';
+                $className = 'Xml';
                 break;
         }
 
 
-        $className = $responseType.'Responder';
+        $className = $className.'Responder';
         $filePath = COMPONENT_RESPONDER_TYPES_FOLDER.'/'.$className.'.php';
 
         if (!file_exists($filePath))

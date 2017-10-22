@@ -5,7 +5,7 @@
 * https://opensource.org/licenses/MIT
 **/
 
-include_once 'components/Responder/interface/ResponderInterface.php';
+require_once 'components/Responder/interface/ResponderInterface.php';
 
 class XmlResponder implements ResponderInterface {
     private $httpState;

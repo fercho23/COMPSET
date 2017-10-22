@@ -14,6 +14,7 @@ final class Application {
 
     public static function run() {
         AutoloaderComponents::run();
+        // ErrorHandler::respond('authorization_error');
 
         $input = InputHandler::getInstance();
 

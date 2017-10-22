@@ -5,8 +5,8 @@
 * https://opensource.org/licenses/MIT
 **/
 
-include_once 'traits/ToPreventClonedAndDeserializationTrait.php';
-include_once 'traits/SinglentonGetInstanceTrait.php';
+require_once 'traits/ToPreventClonedAndDeserializationTrait.php';
+require_once 'traits/SinglentonGetInstanceTrait.php';
 
 class HeaderHandler {
     use ToPreventClonedAndDeserializationTrait;

@@ -6,8 +6,8 @@
 **/
 
 require_once 'components/ComponentFactory/ComponentFactory.php';
-include_once 'components/DatabaseHandler/DatabaseHandler.php';
-include_once 'components/DatabaseHandler/test/testConfiguration.php';
+require_once 'components/DatabaseHandler/DatabaseHandler.php';
+require_once 'components/DatabaseHandler/test/testConfiguration.php';
 
 echo '<h1>*************************DatabaseHandler Test***************************</h1>';
 $dbh = ComponentFactory::create('DatabaseHandler');
