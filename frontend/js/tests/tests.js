@@ -1,3 +1,4 @@
+
 // Helper Functions
     function dispatchRequestEndEvent(element, detail) {
         var event = new CustomEvent('RequestEnd', {'detail': detail});
@@ -20,7 +21,8 @@
 
 // TestManager
     TestManager.container = 'container';
-    testsRequest();
     testsTextHelper();
+    testsHtmlLoader();
+    testsRequest();
     TestManager.run();
 // -- TestManager

@@ -24,10 +24,10 @@
     // -- functionRequest
 // -- Tests Functions
 
-    function testsRequest(){
-        TestManager.group('Basic Application Tests');
-        // TestManager.groupHidden();
+function testsRequest() {
+    TestManager.group('Basic Application Tests');
+    // TestManager.groupHidden();
 
-        TestManager.test('Request', functionRequest);
-        TestManager.async('containerRequest');
-    }
+    TestManager.test('Request', functionRequest);
+    TestManager.async('containerRequest');
+}

@@ -8,29 +8,15 @@
 
 function Request() {
     this.url = '';
-    this.method = 'POST';
-    this.contentType = ConfigJs.requestContentType;
-    this.acceptType = ConfigJs.requestAcceptType;
+    this.method = ConfigJs.methodPost;
+    this.contentType = ConfigJs.mimeTypeJson;
+    this.acceptType = ConfigJs.mimeTypeJson;
     this.callback = false;
     this.callbackError = false;
 
     var _parameters = {};
     var _asynchronous = true;
     var _xmlHttp = new XMLHttpRequest();
-
-    function callFunction(fun, variables) {
-        if (fun) {
-            switch (typeof fun) {
-                case 'function':
-                    fun(variables);
-                    break;
-                case 'string':
-                    if (typeof window[fun] === 'function')
-                        window[fun](variables);
-                    break;
-            }
-        }
-    }
 
     Request.prototype.addParameter = function(key, value) {
         _parameters[key] = value;
@@ -46,12 +32,12 @@ function Request() {
         function getDataToSend() {
             var params;
             switch (self.contentType.toLowerCase()) {
+                case ConfigJs.mimeTypeJson:
                 case 'json':
-                case 'application/json':
                     params = JSON.stringify(_parameters);
                     break;
+                case ConfigJs.mimeTypeXml:
                 case 'xml':
-                case 'application/xml':
                     params = '<root>';
                     for (var key in _parameters) {
                         params += '<' + key + '>' + _parameters[key] + '</' + key + '>';
@@ -76,10 +62,10 @@ function Request() {
         _xmlHttp.onreadystatechange = function() {
             if (this.readyState === 4) {
                 if (this.status === 200) {
-                    callFunction(self.callback, this.response);
+                    self.callback(this.response);
                 } else {
                     if (self.callbackError)
-                        callFunction(self.callbackError, this.response);
+                        self.callbackError(this.response);
                     else
                         console.error(this.status, this.response);
                 }

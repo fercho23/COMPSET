@@ -13,36 +13,46 @@
 <head>
     <title>SeaBreeze FrameWork Test</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="frontend/assets/css/w3.css"/>
-    <link rel="stylesheet" type="text/css" href="frontend/assets/css/font-awesome.min.css"/>
-    <link rel="stylesheet" type="text/css" href="frontend/assets/css/TestManager.css"/>
+
+    <link rel="stylesheet" type="text/css" href="frontend/css/vendors/w3.css"/>
+    <!-- <link rel="stylesheet" type="text/css" href="frontend/css/vendors/font-awesome.min.css"/> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+    <link rel="stylesheet" type="text/css" href="frontend/css/TestManager.css"/>
 
 </head>
 <body>
     <div id="container"></div>
 
-    <script type="text/javascript" src="frontend/assets/js/ConfigJs.js"></script>
-    <script type="text/javascript" src="frontend/assets/js/language/<?php echo $language; ?>.js"></script>
-    <script type="text/javascript" src="frontend/assets/js/TextHelper.js"></script>
+    <script type="text/javascript" src="frontend/js/components/JsLoader.js"></script>
+    <script type="text/javascript" src="frontend/js/ConfigJs.js"></script>
     <script>
         ConfigJs.language = '<?php echo $language; ?>';
     </script>
-    <script type="text/javascript" src="frontend/assets/js/Request.js"></script>
+    <script type="text/javascript" src="frontend/js/application.test.js"></script>
+<!--
+-->
 
 
-    <script type="text/javascript" src="frontend/assets/js/tests/TestManager.js"></script>
-    <!-- ASSERTS -->
-        <script src="frontend/assets/js/tests/asserts/AssertEquals.js"></script>
-        <script src="frontend/assets/js/tests/asserts/AssertNotEquals.js"></script>
-        <script src="frontend/assets/js/tests/asserts/AssertLike.js"></script>
-        <script src="frontend/assets/js/tests/asserts/AssertUnLike.js"></script>
-    <!-- -- ASSERTS -->
+<!--
+    <script type="text/javascript" src="frontend/js/ConfigJs.js"></script>
+    <script type="text/javascript" src="frontend/js/components/language/<?php echo $language; ?>.js"></script>
+    <script>
+        ConfigJs.language = '<?php echo $language; ?>';
+    </script>
+    <script type="text/javascript" src="frontend/js/components/Request.js"></script>
+    <script type="text/javascript" src="frontend/js/components/TextHelper.js"></script>
+    <script type="text/javascript" src="frontend/js/components/HtmlLoader.js"></script>
 
-    <!-- GROUP TESTS -->
-        <script type="text/javascript" src="frontend/assets/js/tests/testsRequest.js"></script>
-        <script type="text/javascript" src="frontend/assets/js/tests/testsTextHelper.js"></script>
-    <!-- -- GROUP TESTS -->
+    <script type="text/javascript" src="frontend/js/tests/TestManager.js"></script>
+        <script src="frontend/js/tests/asserts/AssertEquals.js"></script>
+        <script src="frontend/js/tests/asserts/AssertNotEquals.js"></script>
+        <script src="frontend/js/tests/asserts/AssertLike.js"></script>
+        <script src="frontend/js/tests/asserts/AssertUnLike.js"></script>
 
-    <script type="text/javascript" src="frontend/assets/js/tests/tests.js"></script>
+        <script type="text/javascript" src="frontend/js/tests/testsRequest.js"></script>
+        <script type="text/javascript" src="frontend/js/tests/testsTextHelper.js"></script>
+        <script type="text/javascript" src="frontend/js/tests/testsHtmlLoader.js"></script>
+    <script type="text/javascript" src="frontend/js/tests/tests.js"></script>
+-->
 </body>
 </html>

@@ -4,6 +4,13 @@
 * https://opensource.org/licenses/MIT
 **/
 
+// ASSERTS
+    JsLoader.load(ConfigJs.frontendJsTestsUrl + '/asserts/AssertEquals.js');
+    JsLoader.load(ConfigJs.frontendJsTestsUrl + '/asserts/AssertNotEquals.js');
+    JsLoader.load(ConfigJs.frontendJsTestsUrl + '/asserts/AssertLike.js');
+    JsLoader.load(ConfigJs.frontendJsTestsUrl + '/asserts/AssertUnLike.js');
+// -- ASSERTS
+
 var TestManager = (function() {
     var _singleInstance;
     var _groups = [];
@@ -124,7 +131,7 @@ var TestManager = (function() {
 
             var divTitle = document.createElement('div');
                 divTitle.className = 'testsTitle';
-                divTitle.innerHTML = 'Testing in Process ' + spin + getGreenRedAmount(totalGreen , totalred);
+                divTitle.innerHTML = Language.test_test_in_progress + ' ' + spin + getGreenRedAmount(totalGreen , totalred);
                 divTestManager.appendChild(divTitle);
 
             var spin = '<i class="fa fa-circle-o-notch fa-spin fa-fw"></i>';
@@ -177,14 +184,14 @@ var TestManager = (function() {
                     liTest.innerHTML = test['title'] + '.' + getTimeMeasure(end, start) + (assertResult === true ? '' : '<br><strong> ' + assertResult + '</strong>');
                     liTest.className = 'w3-text-' + (assertResult === true ? 'green' : 'red');
                     smallTitleTestGroup.innerHTML = spin + getGreenRedAmount(_greens , _reds);
-                    divTitle.innerHTML = 'Testing in Process ' + spin + getGreenRedAmount(totalGreen + _greens , totalred + _reds);
+                    divTitle.innerHTML = Language.test_test_in_progress + ' ' + spin + getGreenRedAmount(totalGreen + _greens , totalred + _reds);
                 }
                 totalGreen += _greens;
                 totalred += _reds;
                 smallTitleTestGroup.innerHTML = getGreenRedAmount(_greens , _reds);
             }
 
-            divTitle.innerHTML = 'Total Tests ' + getGreenRedAmount(totalGreen , totalred);
+            divTitle.innerHTML = Language.test_total_test + ' ' + getGreenRedAmount(totalGreen , totalred);
         }
 
     }

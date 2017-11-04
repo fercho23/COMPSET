@@ -7,12 +7,10 @@
 
 require_once 'components/InputHandler/interface/InputInterface.php';
 
-require_once 'traits/ToPreventClonedAndDeserializationTrait.php';
-require_once 'traits/SinglentonGetInstanceTrait.php';
+require_once 'traits/SinglentonTrait.php';
 
 class InputHandler implements InputInterface {
-    use ToPreventClonedAndDeserializationTrait;
-    use SinglentonGetInstanceTrait;
+    use SinglentonTrait;
 
     private static $instancia;
     private $inputType;
