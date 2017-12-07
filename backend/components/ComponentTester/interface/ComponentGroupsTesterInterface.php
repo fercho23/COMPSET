@@ -5,7 +5,10 @@
 * https://opensource.org/licenses/MIT
 **/
 
-    require_once 'application/Application.php';
-    Application::run();
+interface ComponentGroupsTesterInterface {
+    public function addGroupTests(GroupTestsInterface $groupTests);
+    public function run();
+    public function getResponse();
+}
 
 ?>

@@ -11,19 +11,15 @@ function Request() {
     this.method = ConfigJs.methodPost;
     this.contentType = ConfigJs.mimeTypeJson;
     this.acceptType = ConfigJs.mimeTypeJson;
+    this.asynchronous = true;
     this.callback = false;
     this.callbackError = false;
 
     var _parameters = {};
-    var _asynchronous = true;
     var _xmlHttp = new XMLHttpRequest();
 
     Request.prototype.addParameter = function(key, value) {
         _parameters[key] = value;
-    }
-
-    Request.prototype.setAsynchronous = function(value) {
-        _asynchronous = value === true ? true : false;
     }
 
     Request.prototype.send = function() {
@@ -55,19 +51,21 @@ function Request() {
             return params;
         }
 
-        _xmlHttp.open(self.method, self.url, _asynchronous);
+        _xmlHttp.open(self.method, self.url, self.asynchronous);
         _xmlHttp.setRequestHeader('Content-Type', self.contentType);
         _xmlHttp.setRequestHeader('Accept', self.acceptType);
 
         _xmlHttp.onreadystatechange = function() {
             if (this.readyState === 4) {
+                var response = this.response;
+
                 if (this.status === 200) {
-                    self.callback(this.response);
+                    self.callback(response);
                 } else {
                     if (self.callbackError)
-                        self.callbackError(this.response);
+                        self.callbackError(response);
                     else
-                        console.error(this.status, this.response);
+                        console.error(this.status, response);
                 }
             }
         };

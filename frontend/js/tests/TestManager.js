@@ -145,7 +145,7 @@ var TestManager = (function() {
                     var divTestGroup = document.createElement('div');
                         divTestGroup.className = 'testGroup';
                     var titleTestGroup = document.createElement('div');
-                        titleTestGroup.className = 'testGroupTitle';
+                        titleTestGroup.className = 'testGroupTitle w3-text-blue-grey w3-hover-text-dark-grey';
                         titleTestGroup.onclick = function() {
                             this.parentElement.querySelector('.testGroupList').classList.toggle('hidden');
                         };

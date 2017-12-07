@@ -5,7 +5,10 @@
 * https://opensource.org/licenses/MIT
 **/
 
-    require_once 'application/Application.php';
-    Application::run();
+interface AutoloaderInterface {
+    public static function load($className);
+    public static function setFileExt($fileExt);
+    public static function setFolders($folders);
+}
 
 ?>

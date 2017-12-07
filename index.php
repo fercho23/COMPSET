@@ -23,7 +23,7 @@
 <body>
     <div id="container"></div>
 
-    <script type="text/javascript" src="frontend/js/components/JsLoader.js"></script>
+    <script type="text/javascript" src="frontend/js/components/JsLoader/JsLoader.js"></script>
     <script type="text/javascript" src="frontend/js/ConfigJs.js"></script>
     <script>
         ConfigJs.language = '<?php echo $language; ?>';

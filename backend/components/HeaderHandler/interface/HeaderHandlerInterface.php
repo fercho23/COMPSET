@@ -5,7 +5,9 @@
 * https://opensource.org/licenses/MIT
 **/
 
-    require_once 'application/Application.php';
-    Application::run();
+interface HeaderHandlerInterface {
+    public function get($name);
+    public function isset($name);
+}
 
 ?>

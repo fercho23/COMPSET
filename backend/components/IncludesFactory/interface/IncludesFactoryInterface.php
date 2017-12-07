@@ -5,7 +5,8 @@
 * https://opensource.org/licenses/MIT
 **/
 
-    require_once 'application/Application.php';
-    Application::run();
+interface IncludesFactoryInterface {
+    public static function create($includeName, $componentName);
+}
 
 ?>

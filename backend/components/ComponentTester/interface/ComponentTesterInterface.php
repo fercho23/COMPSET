@@ -5,7 +5,10 @@
 * https://opensource.org/licenses/MIT
 **/
 
-    require_once 'application/Application.php';
-    Application::run();
+interface ComponentTesterInterface {
+    public function setComponentToTest($componentToTest, $titleToShow);
+    public function runAllTests();
+    public function getResponse();
+}
 
 ?>

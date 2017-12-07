@@ -63,20 +63,25 @@ class InputHandler implements InputInterface {
                 break;
         }
 
-
         $className = $className.'Input';
-        $filePath = COMPONENT_INPUT_HANDLER_TYPES_FOLDER.'/'.$className.'.php';
 
-        if (!file_exists($filePath))
+        $inputHandler = IncludesFactory::createWithData($className, 'InputHandler', $data);
+        if ($inputHandler === null)
             ErrorHandler::respond('unknown_input_type');
 
-        include_once $filePath;
+        return $inputHandler;
 
-        if (!class_exists($className))
-            ErrorHandler::respond('unknown_input_type');
+        // $filePath = COMPONENT_INPUT_HANDLER_TYPES_FOLDER.'/'.$className.'.php';
 
-        return new $className($data);
+        // if (!file_exists($filePath))
+        //     ErrorHandler::respond('unknown_input_type');
 
+        // include_once $filePath;
+
+        // if (!class_exists($className))
+        //     ErrorHandler::respond('unknown_input_type');
+
+        // return new $className($data);
     }
 
     private function setInputType(InputInterface $inputType) {

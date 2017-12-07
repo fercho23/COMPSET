@@ -5,7 +5,8 @@
 * https://opensource.org/licenses/MIT
 **/
 
-    require_once 'application/Application.php';
-    Application::run();
+interface ErrorHandlerInterface {
+    public static function respond($languageKeyName, $extraMessage='');
+}
 
 ?>

@@ -1,0 +1,50 @@
+<div>
+    <h4>HTML Render Test</h4>
+    $FOR   
+        names LIKE  span
+    FOR$
+
+    <br>
+
+    $FOR
+        surnames
+    LIKE
+        span
+    FOR$
+
+    <br>
+
+    $FOR 
+        ages  
+        LIKE    
+        span ['class=age ageNumber']        
+    FOR$
+
+    <br>
+
+    $FOR 
+        phones  
+        LIKE    
+        span   INTO          
+        div        
+    FOR$
+
+    <br>
+
+    $FOR 
+        phones  
+        LIKE    
+        span [$DATA < 666666 ? 'class=litle' : '']   INTO          
+        div        
+    FOR$
+
+    <br>
+
+    $FOR
+        surnames
+    LIKE
+        span INTO  div ['class=superDiv*style=font-weight:600;']
+
+FOR$
+
+</div>

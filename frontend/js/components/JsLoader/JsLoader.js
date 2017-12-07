@@ -9,6 +9,10 @@ var JsLoader = (function() {
    return {
         load: function(jsFilePath) {
             document.write('<script type="text/javascript" src="' + jsFilePath + '"></script>');
+        },
+
+        loadComponent: function(componentName) {
+            JsLoader.load(ConfigJs.frontendJsComponentUrl + '/' + componentName + '/' + componentName + '.js');
         }
     }
 

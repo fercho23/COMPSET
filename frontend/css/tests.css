@@ -1,0 +1,34 @@
+.hide {
+  display: none;
+}
+
+.containerTests {
+  min-height: 50px;
+  min-width: 100%;
+  margin: 10px;
+}
+
+.buttonTestPhp {
+  margin: 5px;
+  float: right;
+}
+
+.allComponentGroupsTests,
+.componentGroupsTestsTitle,
+.groupTestsTitle {
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.allComponentGroupsTests > small,
+.componentGroupsTestsTitle > small,
+.groupTestsTitle > small {
+  font-style: italic;
+}
+
+.componentGroupsTests,
+.groupTests,
+.groupTestsList {
+  margin: 2px 10px;
+}

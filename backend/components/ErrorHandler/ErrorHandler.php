@@ -5,7 +5,9 @@
 * https://opensource.org/licenses/MIT
 **/
 
-class ErrorHandler {
+require_once 'components/ErrorHandler/interface/ErrorHandlerInterface.php';
+
+class ErrorHandler implements ErrorHandlerInterface {
 
     public static function respond($languageKeyName, $extraMessage='') {
         $message = Language::getInstance()->$languageKeyName;

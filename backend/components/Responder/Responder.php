@@ -25,21 +25,19 @@ class Responder implements ResponderInterface {
             case 'application/xml':
                 $className = 'Xml';
                 break;
+
+            case 'html':
+            case 'text/html':
+                $className = 'Html';
+                break;
         }
 
-
         $className = $className.'Responder';
-        $filePath = COMPONENT_RESPONDER_TYPES_FOLDER.'/'.$className.'.php';
-
-        if (!file_exists($filePath))
+        $responder = IncludesFactory::create($className, 'Responder');
+        if ($responder === null)
             ErrorHandler::respond('unknown_responder_type');
 
-        include_once $filePath;
-
-        if (!class_exists($className))
-            ErrorHandler::respond('unknown_responder_type');
-
-        $this->responder = new $className();
+        $this->responder = $responder;
     }
 
     public function setHttpState($state) {

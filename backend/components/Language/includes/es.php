@@ -23,6 +23,8 @@ return array (
 
     'unknown_responder_type' => 'Error en el Tipo de Respuesta',
     'unknown_input_type' => 'Error en el Tipo de Input',
+
+    'component_tester_title' => 'Tests PHP',
 );
 
 ?>

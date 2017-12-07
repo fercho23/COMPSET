@@ -5,9 +5,11 @@
 * https://opensource.org/licenses/MIT
 **/
 
+require_once 'components/HeaderHandler/interface/HeaderHandlerInterface.php';
+
 require_once 'traits/SinglentonTrait.php';
 
-class HeaderHandler {
+class HeaderHandler implements HeaderHandlerInterface {
     use SinglentonTrait;
 
     private static $instancia;

@@ -5,6 +5,8 @@
 * https://opensource.org/licenses/MIT
 **/
 
+// define('TESTING_IS_ENABLED ', true);
+
 define('LANGUAGE_DEFAULT', 'es');
 
 // define('CONTENT_TYPE_TO_SEND', 'es');
@@ -14,17 +16,16 @@ define('COMPONENTS_FOLDERS', 'components');
 
 // COMPONENTS
     // COMPONENT_RESPONDER
-        define('COMPONENT_RESPONDER_TYPES_FOLDER', 'components/Responder/types');
         define('COMPONENT_RESPONDER_CONTENT_TYPE_TO_SEND_DEFAULT', 'application/json');
     // -- COMPONENT_RESPONDER
 
     // COMPONENT_LANGUAGE
-    define('COMPONENT_LANGUAGES_FOLDER', 'components/Language/languages');
+    define('COMPONENT_LANGUAGES_FOLDER', 'components/Language/includes');
     // -- COMPONENT_LANGUAGE
 
-    // COMPONENT_INPUT
-        define('COMPONENT_INPUT_HANDLER_TYPES_FOLDER', 'components/InputHandler/types');
-    // -- COMPONENT_INPUT
+    // COMPONENT_VALIDATOR
+        define('COMPONENT_VALIDATOR_TYPES_FOLDER', 'components/Validator/types');
+    // -- COMPONENT_VALIDATOR
 
 // -- COMPONENTS
 

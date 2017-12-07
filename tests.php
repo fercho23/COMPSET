@@ -18,12 +18,18 @@
     <!-- <link rel="stylesheet" type="text/css" href="frontend/css/vendors/font-awesome.min.css"/> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
     <link rel="stylesheet" type="text/css" href="frontend/css/TestManager.css"/>
+    <link rel="stylesheet" type="text/css" href="frontend/css/tests.css"/>
 
 </head>
 <body>
-    <div id="container"></div>
+    <div class="containerTests">
+        <button id="buttonTestPhp" class="buttonTestPhp w3-button w3-deep-purple" onclick="functionPhpTests();" type="button">Call PHP Tests</button>
+        <div id="containerTestPhp"></div>
+    </div>
 
-    <script type="text/javascript" src="frontend/js/components/JsLoader.js"></script>
+    <div id="containerTestManager" class="containerTests"></div>
+
+    <script type="text/javascript" src="frontend/js/components/JsLoader/JsLoader.js"></script>
     <script type="text/javascript" src="frontend/js/ConfigJs.js"></script>
     <script>
         ConfigJs.language = '<?php echo $language; ?>';

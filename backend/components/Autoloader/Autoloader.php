@@ -5,8 +5,9 @@
 * https://opensource.org/licenses/MIT
 **/
 
-class Autoloader
-{
+require_once 'components/Autoloader/interface/AutoloaderInterface.php';
+
+class Autoloader implements AutoloaderInterface {
     /**
      * File extension as a string. Defaults to ".php".
      */
