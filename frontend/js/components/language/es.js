@@ -8,4 +8,5 @@ var Language =
 {
     test_test_in_progress: 'Pruebas en Progreso',
     test_total_test: 'Pruebas Totales',
+    test_total_test_support_area: 'Pruebas Totales Área de Soporte',
 }

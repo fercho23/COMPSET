@@ -14,8 +14,8 @@ var ConfigJs =
         frontendJsUrl: 'frontend/js',
         frontendJsComponentUrl: 'frontend/js/components',
         // FRONTEND TEST
-            frontendJsTestsUrl: 'frontend/js/tests',
-            frontendJsTestsGroupsUrl: 'frontend/js/tests/groups',
+            frontendJsTestsUrl: 'frontend/js/components/TestManager',
+            frontendJsTestsGroupsUrl: 'frontend/js/components/TestManager/groups',
         // -- FRONTEND TEST
         frontendJsonUrl: 'frontend/json',
     // -- FRONTEND

@@ -3,26 +3,55 @@
   display: none;
 }
 
-div.TestManager {
-  /*margin: 10px;*/
-}
+/* TestManager */
+  div.TestManager {
+    /*margin: 10px;*/
+    /*font-size: 15px;*/
+    margin: 5px;
+    padding: 5px;
+    background: #e8e8e8;
+    border-radius: 5px;
+    border: 1px solid #000;
+    width: 99%;
+  }
 
-div.TestManager > div.testsTitle{
-  margin-bottom: 10px;
-}
+  div.TestManager > div.testsTitle{
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
 
-div.TestManager > div.testGroup {
-  margin-bottom: 10px;
-  margin-left: 10px;
-}
+  div.TestManager > div.testGroups > div.testGroup {
+    margin-bottom: 10px;
+    margin-left: 10px;
+  }
 
-div.TestManager > div.testGroup > div.testGroupTitle {
-  margin-right: 10px;
-  display: inline-block;
-  cursor: pointer;
-  cursor: hand;
-}
+  div.TestManager > div.testGroups > div.testGroup > div.testGroupTitle {
+    margin-right: 10px;
+    display: inline-block;
+    cursor: pointer;
+  }
 
-div.TestManager > div.testGroup > small.testGroupTitleSmall {
-  font-style: italic;
-}
+  div.TestManager > div.testGroups > div.testGroup > .testGroupList {
+    margin-top: 0px;
+  }
+
+  div.TestManager > div.testGroups > div.testGroup > small.testGroupTitleSmall {
+    font-style: italic;
+  }
+/* -- TestManager */
+
+/* TestManagerSupport */
+  div.TestManagerSupport{
+    margin: 5px;
+    padding: 5px;
+    background: #e8e8e8;
+    border-radius: 5px;
+    border: 1px solid #000;
+    width: 99%;
+  }
+
+  div.TestManagerSupport > div.testsTitleSupport{
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+/* -- TestManagerSupport */

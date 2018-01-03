@@ -4,8 +4,14 @@
 
 .containerTests {
   min-height: 50px;
-  min-width: 100%;
-  margin: 10px;
+  /*min-width: 100%;*/
+
+  margin: 5px;
+  padding: 5px;
+  background: #e8e8e8;
+  border-radius: 5px;
+  border: 1px solid #000;
+  width: 99%;
 }
 
 .buttonTestPhp {
@@ -16,7 +22,7 @@
 .allComponentGroupsTests,
 .componentGroupsTestsTitle,
 .groupTestsTitle {
-  font-weight: 600;
+  /*font-weight: 600;*/
   cursor: pointer;
   display: inline-block;
 }

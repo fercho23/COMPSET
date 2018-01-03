@@ -119,20 +119,43 @@ var TestManager = (function() {
             var totalGreen = 0;
             var totalred = 0;
 
-            var divTestManager = document.createElement('div');
-                divTestManager.id = 'TestManager';
-                divTestManager.className = 'TestManager';
-            containerArea.appendChild(divTestManager);
+            // TestManager
+                var divTestManager = document.createElement('div');
+                    divTestManager.id = 'TestManager';
+                    divTestManager.className = 'TestManager';
+                containerArea.appendChild(divTestManager);
 
-            var divTestManagerSupport = document.createElement('div');
-                divTestManagerSupport.id = 'TestManagerSupport';
-                divTestManagerSupport.className = 'TestManagerSupport';
-            containerArea.appendChild(divTestManagerSupport);
+                var divTitle = document.createElement('div');
+                    divTitle.className = 'testsTitle';
+                    divTitle.innerHTML = Language.test_test_in_progress + ' ' + spin + getGreenRedAmount(totalGreen , totalred);
+                    divTitle.onclick = function() {
+                        this.parentElement.querySelector('.testGroups').classList.toggle('hidden');
+                    };
+                    divTestManager.appendChild(divTitle);
 
-            var divTitle = document.createElement('div');
-                divTitle.className = 'testsTitle';
-                divTitle.innerHTML = Language.test_test_in_progress + ' ' + spin + getGreenRedAmount(totalGreen , totalred);
-                divTestManager.appendChild(divTitle);
+                var divGroups = document.createElement('div');
+                    divGroups.className = 'testGroups';
+                    divTestManager.appendChild(divGroups);
+            // -- TestManager
+
+            // TestManagerSupport
+                var divTestManagerSupport = document.createElement('div');
+                    divTestManagerSupport.id = 'TestManagerSupport';
+                    divTestManagerSupport.className = 'TestManagerSupport';
+                containerArea.appendChild(divTestManagerSupport);
+
+                var divTitleSupport = document.createElement('div');
+                    divTitleSupport.className = 'testsTitleSupport';
+                    divTitleSupport.innerHTML = Language.test_test_in_progress + ' ' + spin;
+                    divTitleSupport.onclick = function() {
+                        this.parentElement.querySelector('.testGroupsSupport').classList.toggle('hidden');
+                    };
+                    divTestManagerSupport.appendChild(divTitleSupport);
+
+                var divGroupsSupport = document.createElement('div');
+                    divGroupsSupport.className = 'testGroupsSupport';
+                    divTestManagerSupport.appendChild(divGroupsSupport);
+            // -- TestManagerSupport
 
             var spin = '<i class="fa fa-circle-o-notch fa-spin fa-fw"></i>';
             for (y in _groups) {
@@ -160,7 +183,7 @@ var TestManager = (function() {
                         divTestGroup.appendChild(smallTitleTestGroup);
                         divTestGroup.appendChild(listTestGroup);
 
-                    divTestManager.appendChild(divTestGroup);
+                    divGroups.appendChild(divTestGroup);
                     if ('hidden' in group)
                         titleTestGroup.onclick();
                 // -- VISUAL
@@ -170,7 +193,7 @@ var TestManager = (function() {
                     var test = tests[x];
 
                     if ('asyncElement' in test)
-                        divTestManagerSupport.appendChild(test['asyncElement']);
+                        divGroupsSupport.appendChild(test['asyncElement']);
 
                     var liTest = document.createElement('li');
                         liTest.className = 'w3-text-deep-orange';
@@ -192,6 +215,7 @@ var TestManager = (function() {
             }
 
             divTitle.innerHTML = Language.test_total_test + ' ' + getGreenRedAmount(totalGreen , totalred);
+            divTitleSupport.innerHTML = Language.test_total_test_support_area;
         }
 
     }

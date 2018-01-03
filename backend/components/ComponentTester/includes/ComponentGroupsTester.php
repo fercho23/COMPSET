@@ -41,8 +41,8 @@ class ComponentGroupsTester implements ComponentGroupsTesterInterface {
             $this->green += $green;
             $this->red += $red;
 
-            $content = '<div class="groupTestsTitle" onclick="groupTestsToggle(this);">'.$groupTests->getTitle().'<small> '.($green + $red).' (<span class="w3-text-green">'.$green.'</span> / <span class="w3-text-red">'.$red.'</span>)</small> :</div>';
-            $content .= '<ol class="groupTestsList">'.$contentTests.'</ol>';
+            $content = '<div class="groupTestsTitle w3-text-blue-grey w3-hover-text-dark-grey" onclick="groupTestsToggle(this);">'.$groupTests->getTitle().'<small> '.($green + $red).' (<span class="w3-text-green">'.$green.'</span> / <span class="w3-text-red">'.$red.'</span>)</small> :</div>';
+            $content .= '<ol class="groupTestsList'.($groupTests->isHidden() ? ' hidden' : '').'">'.$contentTests.'</ol>';
 
             $this->response .= '<div class="groupTests">'.$content.'</div>';
             // $this->response .= '<li class="groupTests">'.$content.'</li>';

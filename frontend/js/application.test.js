@@ -7,6 +7,7 @@
     JsLoader.loadComponent('HtmlLoader');
 
     JsLoader.load(ConfigJs.frontendJsTestsUrl + '/TestManager.js');
+    JsLoader.load(ConfigJs.frontendJsTestsUrl + '/PHPTestsHelpers.js');
     JsLoader.load(ConfigJs.frontendJsTestsGroupsUrl + '/testsRequest.js');
     JsLoader.load(ConfigJs.frontendJsTestsGroupsUrl + '/testsTextHelper.js');
     JsLoader.load(ConfigJs.frontendJsTestsGroupsUrl + '/testsHtmlLoader.js');

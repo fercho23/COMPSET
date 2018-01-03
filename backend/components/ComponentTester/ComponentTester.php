@@ -87,7 +87,7 @@ class ComponentTester implements ComponentTesterInterface {
                 $totalGreen += $green;
                 $totalRed += $red;
 
-                $content = '<div class="componentGroupsTestsTitle" onclick="componentGroupTestsToggle(this);">'.$componentTests['title'].'<small> '.($green + $red).' (<span class="w3-text-green">'.$green.'</span> / <span class="w3-text-red">'.$red.'</span>)</small> :</div>';
+                $content = '<div class="componentGroupsTestsTitle w3-text-blue-grey w3-hover-text-dark-grey" onclick="componentGroupTestsToggle(this);">'.$componentTests['title'].'<small> '.($green + $red).' (<span class="w3-text-green">'.$green.'</span> / <span class="w3-text-red">'.$red.'</span>)</small> :</div>';
                 $content .= $componentTests['groupsTester']->getResponse();
 
                 $contentGroupsTests .= '<div class="componentGroupsTests">'.$content.'</div>';
