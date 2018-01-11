@@ -70,7 +70,8 @@ var TestManager = (function() {
 
    return {
         like: function(className, value) {
-            getLastTestInActualGroupTest()['assert'] = new className(value);
+            console.log(className);
+            getLastTestInActualGroupTest()['assert'] = new window[className](value);
         },
 
         group: function(title) {

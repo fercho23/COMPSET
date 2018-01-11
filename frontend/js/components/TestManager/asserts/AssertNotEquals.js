@@ -4,7 +4,6 @@
 * https://opensource.org/licenses/MIT
 **/
 
-
 function AssertNotEquals(value) {
     var _value = value;
     var _valueToAssert;
@@ -17,6 +16,5 @@ function AssertNotEquals(value) {
         _valueToAssert = val;
         return _value !== _valueToAssert ? true : getExpectedResult();;
     }
-
 
 }

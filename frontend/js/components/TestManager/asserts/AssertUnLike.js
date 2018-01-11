@@ -4,7 +4,6 @@
 * https://opensource.org/licenses/MIT
 **/
 
-
 function AssertUnLike(value) {
     var _value = value;
     var _valueToAssert;

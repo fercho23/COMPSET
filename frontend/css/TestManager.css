@@ -1,25 +1,33 @@
+/**
+* Copyright (c) 2017 Fernando Ariel Mateos <fernandoarielmateos@gmail.com>. All rights reserved.
+* Released under the MIT license
+* https://opensource.org/licenses/MIT
+**/
 
 .hidden {
   display: none;
 }
 
+/* General */
+    div.TestManager,
+    div.TestManagerSupport {
+      margin: 5px;
+      padding: 5px;
+      background: #e8e8e8;
+      border-radius: 5px;
+      border: 1px solid #000;
+      width: 99%;
+    }
+
+    div.TestManager > div.testsTitle,
+    div.TestManagerSupport > div.testsTitleSupport {
+      margin-bottom: 10px;
+      cursor: pointer;
+      display: inline-block;
+    }
+/* General */
+
 /* TestManager */
-  div.TestManager {
-    /*margin: 10px;*/
-    /*font-size: 15px;*/
-    margin: 5px;
-    padding: 5px;
-    background: #e8e8e8;
-    border-radius: 5px;
-    border: 1px solid #000;
-    width: 99%;
-  }
-
-  div.TestManager > div.testsTitle{
-    margin-bottom: 10px;
-    cursor: pointer;
-  }
-
   div.TestManager > div.testGroups > div.testGroup {
     margin-bottom: 10px;
     margin-left: 10px;
@@ -41,17 +49,5 @@
 /* -- TestManager */
 
 /* TestManagerSupport */
-  div.TestManagerSupport{
-    margin: 5px;
-    padding: 5px;
-    background: #e8e8e8;
-    border-radius: 5px;
-    border: 1px solid #000;
-    width: 99%;
-  }
 
-  div.TestManagerSupport > div.testsTitleSupport{
-    margin-bottom: 10px;
-    cursor: pointer;
-  }
 /* -- TestManagerSupport */

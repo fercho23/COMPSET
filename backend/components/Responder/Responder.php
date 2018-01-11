@@ -6,6 +6,7 @@
 **/
 
 require_once 'components/Responder/interface/ResponderInterface.php';
+require_once 'components/Responder/config/ini.php';
 
 class Responder implements ResponderInterface {
     private $responder;

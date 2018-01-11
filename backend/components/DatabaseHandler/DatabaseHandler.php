@@ -6,6 +6,7 @@
 **/
 
 require_once 'components/DatabaseHandler/interface/DatabaseHandlerInterface.php';
+require_once 'components/DatabaseHandler/config/ini.php';
 
 class DatabaseHandler implements DatabaseHandlerInterface {
 
@@ -39,7 +40,7 @@ class DatabaseHandler implements DatabaseHandlerInterface {
 
                 case 'pgsql':
                     if (!defined('CT_DATABASE_PORT')) define('CT_DATABASE_PORT', '5432');
-                    $this->handle = new PDO("pgsql:host=". CT_DATABASE_HOST
+                    $this->handle = new PDO('pgsql:host='. CT_DATABASE_HOST
                                                     . ';port=' . CT_DATABASE_PORT 
                                                     .';dbname=' . CT_DATABASE_NAME
                                                     .';charset=' . CT_DATABASE_CHARSET,

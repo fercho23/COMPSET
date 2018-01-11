@@ -9,11 +9,10 @@
 
 define('LANGUAGE_DEFAULT', 'es');
 
-// define('CONTENT_TYPE_TO_SEND', 'es');
-
 define('MODULES_FOLDER', 'modules');
 define('COMPONENTS_FOLDERS', 'components');
 
+/*
 // COMPONENTS
     // COMPONENT_RESPONDER
         define('COMPONENT_RESPONDER_CONTENT_TYPE_TO_SEND_DEFAULT', 'application/json');
@@ -24,7 +23,7 @@ define('COMPONENTS_FOLDERS', 'components');
     // -- COMPONENT_LANGUAGE
 
     // COMPONENT_VALIDATOR
-        define('COMPONENT_VALIDATOR_TYPES_FOLDER', 'components/Validator/types');
+        define('COMPONENT_VALIDATOR_TYPES_FOLDER', 'components/Validator/includes');
     // -- COMPONENT_VALIDATOR
 
 // -- COMPONENTS
@@ -60,5 +59,6 @@ define('COMPONENTS_FOLDERS', 'components');
         // define('CT_DATABASE_CHARSET', 'utf8');
     // -- CONNECTION FOR POSTGRESQL
 // -- DATABASE
+*/
 
 ?>

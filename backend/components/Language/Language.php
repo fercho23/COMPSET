@@ -6,6 +6,7 @@
 **/
 
 require_once 'traits/SinglentonTrait.php';
+require_once 'components/Language/config/ini.php';
 
 class Language {
     use SinglentonTrait;
