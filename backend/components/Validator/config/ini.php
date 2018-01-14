@@ -5,6 +5,6 @@
 * https://opensource.org/licenses/MIT
 **/
 
-define('COMPONENT_VALIDATOR_TYPES_FOLDER', 'components/Validator/includes');
+define('COMPONENT_VALIDATOR_INCLUDES_FOLDER', 'components/Validator/includes');
 
 ?>

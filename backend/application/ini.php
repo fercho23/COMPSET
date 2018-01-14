@@ -15,7 +15,7 @@ define('COMPONENTS_FOLDERS', 'components');
 /*
 // COMPONENTS
     // COMPONENT_RESPONDER
-        define('COMPONENT_RESPONDER_CONTENT_TYPE_TO_SEND_DEFAULT', 'application/json');
+        define('COMPONENT_RESPONDER_CONTENT_INCLUDES_TO_SEND_DEFAULT', 'application/json');
     // -- COMPONENT_RESPONDER
 
     // COMPONENT_LANGUAGE
@@ -23,7 +23,7 @@ define('COMPONENTS_FOLDERS', 'components');
     // -- COMPONENT_LANGUAGE
 
     // COMPONENT_VALIDATOR
-        define('COMPONENT_VALIDATOR_TYPES_FOLDER', 'components/Validator/includes');
+        define('COMPONENT_VALIDATOR_INCLUDES_FOLDER', 'components/Validator/includes');
     // -- COMPONENT_VALIDATOR
 
 // -- COMPONENTS

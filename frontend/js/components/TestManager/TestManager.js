@@ -18,6 +18,7 @@ var TestManager = (function() {
 
     var _greens = 0;
     var _reds = 0;
+    var _timeOut = ConfigJs.TestManagerTimeOutDefault !== undefined ? ConfigJs.TestManagerTimeOutDefault : 3000;
 
     this.container = 'TestManager';
 
@@ -44,12 +45,26 @@ var TestManager = (function() {
 
     async function getValueByTest(test) {
         var value = undefined;
-        fun = test['function'];
+        var fun = test['function'];
         if ('async' in test) {
             'arguments' in test ? fun.apply(this, test['arguments']) : fun();
+
+            if ('asyncTimeOut' in test) {
+                var timer = setTimeout(function() {
+                    var event = new CustomEvent('RequestTimeOut', {'detail': new Error('Time out')});
+                    test['asyncElement'].dispatchEvent(event);
+                }, test['asyncTimeOut']);
+            }
+
             await test['async'].then(function(val) {
                 value = val;
+            }).catch(e => {
+                // console.log(e);
             });
+
+            if ('asyncTimeOut' in test) {
+                clearTimeout(timer);
+            }
         } else {
             value = 'arguments' in test ? fun.apply(this, test['arguments']) : fun();
         }
@@ -94,25 +109,39 @@ var TestManager = (function() {
             getActualGroupTests().push(test);
         },
 
-        withParameters: function(arg) {
+        withParameters: function() {
             getLastTestInActualGroupTest()['arguments'] = arguments;
         },
 
-        async: function(elementId) {
-            var element = document.getElementById(elementId);
-            if (element === null) {
-                element = document.createElement('div');
-                element.id = elementId;
-                getLastTestInActualGroupTest()['asyncElement'] = element;
-            }
+        async: function(elementId, timeOut) {
+            var test = getLastTestInActualGroupTest();
 
-            var promise = new Promise(function(resolve) {
-                element.addEventListener('RequestEnd', function (e) {
-                    resolve(e.detail);
+            // ELEMENT
+                var element = document.getElementById(elementId);
+                if (element === null) {
+                    element = document.createElement('div');
+                    element.id = elementId;
+                    test['asyncElement'] = element;
+                }
+            // -- ELEMENT
+
+            timeOut = timeOut === undefined ? _timeOut : timeOut;
+            if (timeOut > 0)
+                test['asyncTimeOut'] = timeOut;
+
+            // PROMISE
+                var promise = new Promise(function(resolve, reject) {
+                    element.addEventListener('RequestEnd', function (e) {
+                        resolve(e.detail);
+                    });
+
+                    element.addEventListener('RequestTimeOut', function (e) {
+                        reject(e.detail);
+                    });
                 });
-            });
 
-            getLastTestInActualGroupTest()['async'] = promise;
+                test['async'] = promise;
+            // -- PROMISE
         },
 
         run: async function() {

@@ -1,4 +1,18 @@
+/**
+* Copyright (c) 2017 Fernando Ariel Mateos <fernandoarielmateos@gmail.com>. All rights reserved.
+* Released under the MIT license
+* https://opensource.org/licenses/MIT
+**/
 
+// Tests Functions
+    function functionTextHelperWithParamters(word) {
+        return 'Hola' === word;
+    }
+
+    function functionTextHelperWithManyParamters(word, secondWord) {
+        return 'Hola Chau' === word + ' ' + secondWord;
+    }
+// -- Tests Functions
 
 function testsTextHelper() {
     TestManager.group('TextHelper Tests');
@@ -21,4 +35,10 @@ function testsTextHelper() {
         var result = TextHelper.replace(['First', 'Second']);
         return result === 'Test First First';
     });
+
+    TestManager.test('Text Exmple with Paramters', functionTextHelperWithParamters);
+    TestManager.withParameters('Hola');
+
+    TestManager.test('Text Exmple with many Paramters', functionTextHelperWithManyParamters);
+    TestManager.withParameters('Hola', 'Chau');
 }

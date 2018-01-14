@@ -24,32 +24,34 @@ class DatabaseHandler implements DatabaseHandlerInterface {
         try {
             switch (CT_DATABASE_ENGINE) {
                 case 'sqlite':
-                    $this->handle = new PDO( 'sqlite:' . CT_DATABASE_FILE_PATH);
+                    $this->handle = new PDO('sqlite:' . CT_DATABASE_FILE_PATH);
                 break;
 
                 case 'mysql':
                     if (!defined('CT_DATABASE_PORT')) define('CT_DATABASE_PORT', '3306');
-                    $this->handle = new PDO('mysql:host=' . CT_DATABASE_HOST 
-                                                    . ';port=' . CT_DATABASE_PORT 
-                                                    . ';dbname=' . CT_DATABASE_NAME
-                                                    .';charset=' 
-                                                    . CT_DATABASE_CHARSET,
-                                                    CT_DATABASE_USER,
-                                                    CT_DATABASE_PASS);
+
+                    $this->handle = new PDO('mysql:host=' . CT_DATABASE_HOST
+                                           .';port=' . CT_DATABASE_PORT
+                                           .';dbname=' . CT_DATABASE_NAME
+                                           .';charset='
+                                           .CT_DATABASE_CHARSET,
+                                            CT_DATABASE_USER,
+                                            CT_DATABASE_PASS);
                 break;
 
                 case 'pgsql':
                     if (!defined('CT_DATABASE_PORT')) define('CT_DATABASE_PORT', '5432');
-                    $this->handle = new PDO('pgsql:host='. CT_DATABASE_HOST
-                                                    . ';port=' . CT_DATABASE_PORT 
-                                                    .';dbname=' . CT_DATABASE_NAME
-                                                    .';charset=' . CT_DATABASE_CHARSET,
-                                                    CT_DATABASE_USER,
-                                                    CT_DATABASE_PASS);
+
+                    $this->handle = new PDO('pgsql:host=' . CT_DATABASE_HOST
+                                           .';port=' . CT_DATABASE_PORT
+                                           .';dbname=' . CT_DATABASE_NAME
+                                           .';charset=' . CT_DATABASE_CHARSET,
+                                             CT_DATABASE_USER,
+                                             CT_DATABASE_PASS);
                 break;
             }
             # To generate PDO exceptions.
-            $this->handle->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+            $this->handle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $exception) {
             // die ( CT_DATABASE_CONNECTION_ERROR . $exception->getMessage() );
             ErrorHandler::respond('database_connection_error', $exception->getMessage());
@@ -66,7 +68,7 @@ class DatabaseHandler implements DatabaseHandlerInterface {
         if (!empty($params)) {
             if (is_array($params)) {
                 foreach ($params as $key => $value) {
-                    $statement->bindValue($key+1, $value);
+                    $statement->bindValue($key + 1, $value);
                 }
             } else {
                 $statement->bindValue(1, $params);
@@ -88,7 +90,6 @@ class DatabaseHandler implements DatabaseHandlerInterface {
     }
 
     public function exec($sql, $params = null) {
-        // var_dump($sql, $params);
         try {
             $this->handle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->handle->beginTransaction();

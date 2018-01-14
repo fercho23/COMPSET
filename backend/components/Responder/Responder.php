@@ -14,7 +14,7 @@ class Responder implements ResponderInterface {
     public function __construct() {
         $header = HeaderHandler::getInstance();
 
-        $acceptType = strtolower($header->isset('Accept') ? $header->get('Accept') : CONTENT_TYPE_TO_SEND_DEFAULT);
+        $acceptType = strtolower($header->isset('Accept') ? $header->get('Accept') : COMPONENT_RESPONDER_CONTENT_INCLUDES_TO_SEND_DEFAULT);
 
         switch ($acceptType) {
             case 'json':

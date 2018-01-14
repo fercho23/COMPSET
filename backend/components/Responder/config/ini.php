@@ -5,6 +5,6 @@
 * https://opensource.org/licenses/MIT
 **/
 
-define('COMPONENT_RESPONDER_CONTENT_TYPE_TO_SEND_DEFAULT', 'application/json');
+define('COMPONENT_RESPONDER_CONTENT_INCLUDES_TO_SEND_DEFAULT', 'application/json');
 
 ?>

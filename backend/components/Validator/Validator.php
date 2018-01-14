@@ -6,6 +6,7 @@
 **/
 
 require_once 'traits/ToPreventClonedAndDeserializationTrait.php';
+require_once 'components/Validator/config/ini.php';
 
 class Validator {
     use ToPreventClonedAndDeserializationTrait;
@@ -15,7 +16,7 @@ class Validator {
     private function __construct() {}
 
     public static function getInstance() {
-        foreach (glob(COMPONENT_VALIDATOR_TYPES_FOLDER + '/*.php') as $filename) {
+        foreach (glob(COMPONENT_VALIDATOR_INCLUDES_FOLDER + '/*.php') as $filename) {
             include_once $filename;
         }
         if (!self::$instancia instanceof self)
